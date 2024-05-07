@@ -15,6 +15,9 @@ function App() {
   return (
     <Router>
       <div>
+        <header>
+          <h1>SLO High School Cross Country</h1>
+        </header>
         <nav>
           <ul>
             <li>
