@@ -2,8 +2,76 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Todo @model {
+type Athlete @model {
+  id: ID!   
+  firstName: String!  
+  lastName: String!
+  birthday: String  # ISO 8601 format, e.g., "2000-12-31"
+  gradYear: Int
+  highSchool: String
+  phone: String
+  email: String
+  college: String
+}
+
+type NonAthlete @model {
   id: ID!
-  name: String!
+  firstName: String!
+  lastName: String!
+  phone: String
+  email: String
+  athlete: [Athlete] @hasMany
+  relationRole: String
+}
+
+type Course @model {
+  id: ID!
+  courseName: String!
+  distance: Int
+  distanceUnit: String
+  description: String
+  location: String
+}
+
+type Invite @model {
+  id: ID!
+  inviteName: String!
   description: String
 }
+
+type Event @model {
+  id: ID!
+  course: Course! @hasOne
+  invite: Invite! @hasOne
+  date: String!
+}
+
+type Performance @model {
+  id: ID!
+  event: Event! @hasOne
+  athlete: Athlete! @hasOne
+  time: Int # Time in milliseconds
+  place: Int
+}
+
+#  FUNCTION FOR CONVERT MILLISECONDS TO xx:xx:xx.xx
+
+#function formatTime(milliseconds) {
+#  let time = milliseconds;
+#  const hours = Math.floor(time / 3600000);
+#  time = time % 3600000;
+
+#  const minutes = Math.floor(time / 60000);
+#  time = time % 60000;
+
+#  const seconds = Math.floor(time / 1000);
+#  const hundredths = Math.floor((time % 1000) / 10);
+
+#  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}.${pad(hundredths)}`;
+#}
+
+#function pad(number) {
+#  return number.toString().padStart(2, '0');
+#}
+
+
