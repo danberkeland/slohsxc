@@ -9,6 +9,7 @@ export const getAthlete = /* GraphQL */ `
       lastName
       birthday
       gradYear
+      gender
       highSchool
       phone
       email
@@ -33,6 +34,7 @@ export const listAthletes = /* GraphQL */ `
         lastName
         birthday
         gradYear
+        gender
         highSchool
         phone
         email
@@ -55,6 +57,7 @@ export const getNonAthlete = /* GraphQL */ `
       lastName
       phone
       email
+      gender
       athlete {
         nextToken
         __typename
@@ -79,6 +82,7 @@ export const listNonAthletes = /* GraphQL */ `
         lastName
         phone
         email
+        gender
         relationRole
         createdAt
         updatedAt
@@ -231,6 +235,7 @@ export const getPerformance = /* GraphQL */ `
         lastName
         birthday
         gradYear
+        gender
         highSchool
         phone
         email

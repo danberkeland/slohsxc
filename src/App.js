@@ -10,6 +10,7 @@ import {
 import Athletes from './Athletes';
 import Meets from './Meets';
 import Courses from './Courses';
+import NonAthletes from './NonAthletes';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
               <Link to="/athletes">Athletes</Link>
             </li>
             <li>
+              <Link to="/nonathletes">NonAthletes</Link>
+            </li>
+            <li>
               <Link to="/meets">Meets</Link>
             </li>
             <li>
@@ -35,6 +39,7 @@ function App() {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/athletes" element={<Athletes />} />
+          <Route path="/nonathletes" element={<NonAthletes />} />
           <Route path="/meets" element={<Meets />} />
           <Route path="/courses" element={<Courses />} />
         </Routes>

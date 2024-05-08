@@ -8,6 +8,7 @@ type Athlete @model {
   lastName: String!
   birthday: String  # ISO 8601 format, e.g., "2000-12-31"
   gradYear: Int
+  gender: String
   highSchool: String
   phone: String
   email: String
@@ -20,6 +21,7 @@ type NonAthlete @model {
   lastName: String!
   phone: String
   email: String
+  gender: String
   athlete: [Athlete] @hasMany
   relationRole: String
 }

@@ -9,6 +9,7 @@ export const onCreateAthlete = /* GraphQL */ `
       lastName
       birthday
       gradYear
+      gender
       highSchool
       phone
       email
@@ -28,6 +29,7 @@ export const onUpdateAthlete = /* GraphQL */ `
       lastName
       birthday
       gradYear
+      gender
       highSchool
       phone
       email
@@ -47,6 +49,7 @@ export const onDeleteAthlete = /* GraphQL */ `
       lastName
       birthday
       gradYear
+      gender
       highSchool
       phone
       email
@@ -68,6 +71,7 @@ export const onCreateNonAthlete = /* GraphQL */ `
       lastName
       phone
       email
+      gender
       athlete {
         nextToken
         __typename
@@ -89,6 +93,7 @@ export const onUpdateNonAthlete = /* GraphQL */ `
       lastName
       phone
       email
+      gender
       athlete {
         nextToken
         __typename
@@ -110,6 +115,7 @@ export const onDeleteNonAthlete = /* GraphQL */ `
       lastName
       phone
       email
+      gender
       athlete {
         nextToken
         __typename
@@ -319,6 +325,7 @@ export const onCreatePerformance = /* GraphQL */ `
         lastName
         birthday
         gradYear
+        gender
         highSchool
         phone
         email
@@ -359,6 +366,7 @@ export const onUpdatePerformance = /* GraphQL */ `
         lastName
         birthday
         gradYear
+        gender
         highSchool
         phone
         email
@@ -399,6 +407,7 @@ export const onDeletePerformance = /* GraphQL */ `
         lastName
         birthday
         gradYear
+        gender
         highSchool
         phone
         email
