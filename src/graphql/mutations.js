@@ -17,9 +17,12 @@ export const createAthlete = /* GraphQL */ `
       phone
       email
       college
+      nonAthletes {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      nonAthleteAthleteId
       __typename
     }
   }
@@ -40,9 +43,12 @@ export const updateAthlete = /* GraphQL */ `
       phone
       email
       college
+      nonAthletes {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      nonAthleteAthleteId
       __typename
     }
   }
@@ -63,9 +69,12 @@ export const deleteAthlete = /* GraphQL */ `
       phone
       email
       college
+      nonAthletes {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      nonAthleteAthleteId
       __typename
     }
   }
@@ -82,7 +91,7 @@ export const createNonAthlete = /* GraphQL */ `
       phone
       email
       gender
-      athlete {
+      athletes {
         nextToken
         __typename
       }
@@ -105,7 +114,7 @@ export const updateNonAthlete = /* GraphQL */ `
       phone
       email
       gender
-      athlete {
+      athletes {
         nextToken
         __typename
       }
@@ -128,11 +137,137 @@ export const deleteNonAthlete = /* GraphQL */ `
       phone
       email
       gender
-      athlete {
+      athletes {
         nextToken
         __typename
       }
       relationRole
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createAthleteNonAthlete = /* GraphQL */ `
+  mutation CreateAthleteNonAthlete(
+    $input: CreateAthleteNonAthleteInput!
+    $condition: ModelAthleteNonAthleteConditionInput
+  ) {
+    createAthleteNonAthlete(input: $input, condition: $condition) {
+      id
+      athleteID
+      athlete {
+        id
+        firstName
+        lastName
+        birthday
+        gradYear
+        gender
+        highSchool
+        phone
+        email
+        college
+        createdAt
+        updatedAt
+        __typename
+      }
+      nonAthleteID
+      nonAthlete {
+        id
+        firstName
+        lastName
+        phone
+        email
+        gender
+        relationRole
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateAthleteNonAthlete = /* GraphQL */ `
+  mutation UpdateAthleteNonAthlete(
+    $input: UpdateAthleteNonAthleteInput!
+    $condition: ModelAthleteNonAthleteConditionInput
+  ) {
+    updateAthleteNonAthlete(input: $input, condition: $condition) {
+      id
+      athleteID
+      athlete {
+        id
+        firstName
+        lastName
+        birthday
+        gradYear
+        gender
+        highSchool
+        phone
+        email
+        college
+        createdAt
+        updatedAt
+        __typename
+      }
+      nonAthleteID
+      nonAthlete {
+        id
+        firstName
+        lastName
+        phone
+        email
+        gender
+        relationRole
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteAthleteNonAthlete = /* GraphQL */ `
+  mutation DeleteAthleteNonAthlete(
+    $input: DeleteAthleteNonAthleteInput!
+    $condition: ModelAthleteNonAthleteConditionInput
+  ) {
+    deleteAthleteNonAthlete(input: $input, condition: $condition) {
+      id
+      athleteID
+      athlete {
+        id
+        firstName
+        lastName
+        birthday
+        gradYear
+        gender
+        highSchool
+        phone
+        email
+        college
+        createdAt
+        updatedAt
+        __typename
+      }
+      nonAthleteID
+      nonAthlete {
+        id
+        firstName
+        lastName
+        phone
+        email
+        gender
+        relationRole
+        createdAt
+        updatedAt
+        __typename
+      }
       createdAt
       updatedAt
       __typename
@@ -202,6 +337,7 @@ export const createInvite = /* GraphQL */ `
       id
       inviteName
       description
+      firstYear
       createdAt
       updatedAt
       __typename
@@ -217,6 +353,7 @@ export const updateInvite = /* GraphQL */ `
       id
       inviteName
       description
+      firstYear
       createdAt
       updatedAt
       __typename
@@ -232,6 +369,7 @@ export const deleteInvite = /* GraphQL */ `
       id
       inviteName
       description
+      firstYear
       createdAt
       updatedAt
       __typename
@@ -245,6 +383,7 @@ export const createEvent = /* GraphQL */ `
   ) {
     createEvent(input: $input, condition: $condition) {
       id
+      eventName
       course {
         id
         courseName
@@ -260,11 +399,15 @@ export const createEvent = /* GraphQL */ `
         id
         inviteName
         description
+        firstYear
         createdAt
         updatedAt
         __typename
       }
       date
+      description
+      temperature
+      weather
       createdAt
       updatedAt
       eventCourseId
@@ -280,6 +423,7 @@ export const updateEvent = /* GraphQL */ `
   ) {
     updateEvent(input: $input, condition: $condition) {
       id
+      eventName
       course {
         id
         courseName
@@ -295,11 +439,15 @@ export const updateEvent = /* GraphQL */ `
         id
         inviteName
         description
+        firstYear
         createdAt
         updatedAt
         __typename
       }
       date
+      description
+      temperature
+      weather
       createdAt
       updatedAt
       eventCourseId
@@ -315,6 +463,7 @@ export const deleteEvent = /* GraphQL */ `
   ) {
     deleteEvent(input: $input, condition: $condition) {
       id
+      eventName
       course {
         id
         courseName
@@ -330,11 +479,15 @@ export const deleteEvent = /* GraphQL */ `
         id
         inviteName
         description
+        firstYear
         createdAt
         updatedAt
         __typename
       }
       date
+      description
+      temperature
+      weather
       createdAt
       updatedAt
       eventCourseId
@@ -352,7 +505,11 @@ export const createPerformance = /* GraphQL */ `
       id
       event {
         id
+        eventName
         date
+        description
+        temperature
+        weather
         createdAt
         updatedAt
         eventCourseId
@@ -372,11 +529,11 @@ export const createPerformance = /* GraphQL */ `
         college
         createdAt
         updatedAt
-        nonAthleteAthleteId
         __typename
       }
       time
       place
+      description
       createdAt
       updatedAt
       performanceEventId
@@ -394,7 +551,11 @@ export const updatePerformance = /* GraphQL */ `
       id
       event {
         id
+        eventName
         date
+        description
+        temperature
+        weather
         createdAt
         updatedAt
         eventCourseId
@@ -414,11 +575,11 @@ export const updatePerformance = /* GraphQL */ `
         college
         createdAt
         updatedAt
-        nonAthleteAthleteId
         __typename
       }
       time
       place
+      description
       createdAt
       updatedAt
       performanceEventId
@@ -436,7 +597,11 @@ export const deletePerformance = /* GraphQL */ `
       id
       event {
         id
+        eventName
         date
+        description
+        temperature
+        weather
         createdAt
         updatedAt
         eventCourseId
@@ -456,11 +621,11 @@ export const deletePerformance = /* GraphQL */ `
         college
         createdAt
         updatedAt
-        nonAthleteAthleteId
         __typename
       }
       time
       place
+      description
       createdAt
       updatedAt
       performanceEventId

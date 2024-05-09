@@ -14,9 +14,12 @@ export const getAthlete = /* GraphQL */ `
       phone
       email
       college
+      nonAthletes {
+        nextToken
+        __typename
+      }
       createdAt
       updatedAt
-      nonAthleteAthleteId
       __typename
     }
   }
@@ -41,7 +44,6 @@ export const listAthletes = /* GraphQL */ `
         college
         createdAt
         updatedAt
-        nonAthleteAthleteId
         __typename
       }
       nextToken
@@ -58,7 +60,7 @@ export const getNonAthlete = /* GraphQL */ `
       phone
       email
       gender
-      athlete {
+      athletes {
         nextToken
         __typename
       }
@@ -84,6 +86,69 @@ export const listNonAthletes = /* GraphQL */ `
         email
         gender
         relationRole
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getAthleteNonAthlete = /* GraphQL */ `
+  query GetAthleteNonAthlete($id: ID!) {
+    getAthleteNonAthlete(id: $id) {
+      id
+      athleteID
+      athlete {
+        id
+        firstName
+        lastName
+        birthday
+        gradYear
+        gender
+        highSchool
+        phone
+        email
+        college
+        createdAt
+        updatedAt
+        __typename
+      }
+      nonAthleteID
+      nonAthlete {
+        id
+        firstName
+        lastName
+        phone
+        email
+        gender
+        relationRole
+        createdAt
+        updatedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listAthleteNonAthletes = /* GraphQL */ `
+  query ListAthleteNonAthletes(
+    $filter: ModelAthleteNonAthleteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAthleteNonAthletes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        athleteID
+        nonAthleteID
         createdAt
         updatedAt
         __typename
@@ -137,6 +202,7 @@ export const getInvite = /* GraphQL */ `
       id
       inviteName
       description
+      firstYear
       createdAt
       updatedAt
       __typename
@@ -154,6 +220,7 @@ export const listInvites = /* GraphQL */ `
         id
         inviteName
         description
+        firstYear
         createdAt
         updatedAt
         __typename
@@ -167,6 +234,7 @@ export const getEvent = /* GraphQL */ `
   query GetEvent($id: ID!) {
     getEvent(id: $id) {
       id
+      eventName
       course {
         id
         courseName
@@ -182,11 +250,15 @@ export const getEvent = /* GraphQL */ `
         id
         inviteName
         description
+        firstYear
         createdAt
         updatedAt
         __typename
       }
       date
+      description
+      temperature
+      weather
       createdAt
       updatedAt
       eventCourseId
@@ -204,7 +276,11 @@ export const listEvents = /* GraphQL */ `
     listEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        eventName
         date
+        description
+        temperature
+        weather
         createdAt
         updatedAt
         eventCourseId
@@ -222,7 +298,11 @@ export const getPerformance = /* GraphQL */ `
       id
       event {
         id
+        eventName
         date
+        description
+        temperature
+        weather
         createdAt
         updatedAt
         eventCourseId
@@ -242,11 +322,11 @@ export const getPerformance = /* GraphQL */ `
         college
         createdAt
         updatedAt
-        nonAthleteAthleteId
         __typename
       }
       time
       place
+      description
       createdAt
       updatedAt
       performanceEventId
@@ -266,10 +346,67 @@ export const listPerformances = /* GraphQL */ `
         id
         time
         place
+        description
         createdAt
         updatedAt
         performanceEventId
         performanceAthleteId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const athleteNonAthletesByAthleteID = /* GraphQL */ `
+  query AthleteNonAthletesByAthleteID(
+    $athleteID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAthleteNonAthleteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    athleteNonAthletesByAthleteID(
+      athleteID: $athleteID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        athleteID
+        nonAthleteID
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const athleteNonAthletesByNonAthleteID = /* GraphQL */ `
+  query AthleteNonAthletesByNonAthleteID(
+    $nonAthleteID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelAthleteNonAthleteFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    athleteNonAthletesByNonAthleteID(
+      nonAthleteID: $nonAthleteID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        athleteID
+        nonAthleteID
+        createdAt
+        updatedAt
         __typename
       }
       nextToken
